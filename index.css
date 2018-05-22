@@ -1,0 +1,135 @@
+html {
+	font-family: Trebuchet MS;
+	font-size: 20px;
+}
+
+#titre {
+	text-align : center;
+	text-height : 40px;
+	font-size: 32px;
+	color: #1638E0;
+
+}
+
+#img_titre {
+	margin : 0 auto;
+	text-align: center;
+}
+
+
+aside,
+menu,
+section {
+    display: block;
+}
+
+ul {
+	margin : 0;
+	padding-left: 30px;
+}
+
+a {
+    background-color: transparent;
+    text-decoration: none;
+    -webkit-text-decoration-skip: objects;
+}
+
+a:hover,
+a:active {
+    outline: none;
+}
+
+a img {
+    border: 0;
+}
+
+img {
+    border-style: none;
+}
+
+
+#wrapper {
+    padding: 0 8%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+#wrapper #left-menu {
+    margin: 0 15px;
+    width: 26%;
+
+    min-height: 75vh;
+    background-color: #fff;
+    box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+#wrapper #left-menu .head {
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+#wrapper #left-menu .head .head-title {
+    font-size: 17px;
+    color: #444;
+}
+
+#wrapper #left-menu .head .head-subtitle {
+    font-size: 0.9em;
+    color: #888;
+}
+
+#wrapper #left-menu .head {
+    border-bottom: 1px solid #ccc;
+}
+
+#wrapper #left-menu .menu ul {
+    padding: 0;
+  list-style-type: none;
+}
+
+#wrapper #left-menu .menu ul a {
+    color: #000;
+}
+
+#wrapper #left-menu .menu ul li:hover {
+    background-color: #CFD8E8;
+}
+
+#wrapper #left-menu .menu ul .active {
+    border-left: 3px solid #103B87;
+    background-color: #CFD8E8;
+}
+
+#wrapper #left-menu .menu ul li {
+    font-size: 0.9em;
+    padding: 10px 30px;
+}
+
+
+#wrapper #left-menu .menu ul li img {
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+    margin-right: 12px;
+}
+
+#wrapper section {
+    padding: 15px;
+    height: 100%;
+    flex: 1;
+}
+
+#wrapper section .section-title {
+    font-size: 1.2em;
+    color: #444;
+}
+
+#wrapper section #part {
+    background-color: #fff;
+    margin: 5px 0;
+    padding: 15px;
+    box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.3);
+}
