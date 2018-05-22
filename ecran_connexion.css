@@ -1,0 +1,61 @@
+body {
+    font-family: Trebuchet MS;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+#titre  {
+    text-align: center;
+    margin: 0 auto;
+   
+}    
+
+h4{
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 6vh;
+}
+
+#inscription {
+    padding: 5%;
+    background-color: #f7f7f7;
+
+}
+#inscription form {
+    margin: 0 auto;
+     width: 190px;  
+    text-align: center;
+}
+#inscription form a {
+    text-align: left;
+    font-size: 0.7em;
+    color: #000;
+    text-decoration: none;
+}
+#inscription form input {
+   height: 30px;
+    width: 190px;
+    border-radius: 3px;
+    margin-top: 0.45em;
+    margin-bottom: 0.45em;
+}
+#inscription form input[type=submit]{
+    font-family: Trebuchet MS;
+    background-color: #1638e0;
+    border: none;
+    border-radius: 3;
+    font-size: 0.8em;
+    width: 60%;
+    margin-top: 10px;
+    color: white;
+}
+
+
+
+
+
+
