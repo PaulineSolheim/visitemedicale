@@ -5,6 +5,7 @@
 <head>       
 
     <link rel="stylesheet" href="stylesheets/index.css"/>
+    <link rel="stylesheet" href="stylesheets/liste_usagers.css"/>
     <link rel="shortcut icon" type="image/x-icon" href="doctor.png" />
 	<title> Doctor Planning </title>
 
@@ -36,21 +37,43 @@
             <div id="part">
                 <?php
                 require('connect.php');
+                echo'<table>
+                            <tr>
+                                <th> Nom </th>
+                                <th> Prenom </th> 
+                                <th> N° de sécurité sociale </th>
+                                <th>  </th>
+                                <th>  </th>
+                            </tr>';
+                
+                
 
                 $reqContacts = $linkdpo->prepare('
                         SELECT * FROM USAGERS ORDER BY nom, prenom ');
                         $reqContacts->execute();
-                        while($contacts = $reqContacts->fetch()) { 
+                        $contacts = $reqContacts->fetchAll();
+                        foreach($contacts as $value) { 
                     echo '
                     
-                    <table>
-                     <tr class = "toggle">
-                        <td> '. $contacts->nom .' </td>
-                        <td> '. $contacts->prenom. ' </td>
-                        <td> '. $contacts->numero_ss . ' </td>
+                  
+                     <tr class = "toggle"> <form>
+                        <td> '. $value['nom'] .' </td>
+                        <td> '. $value['prenom'] . ' </td>
+                        <td> '.$value['numero_ss']  . ' </td>
+
+                        <form action="consultations.php" method="post"> 
+                        <input type="hidden" name="id" value='.$value['id_usager'].'>
+                         <td><input id="profil" type="submit" name="submit" value="Voir consultations"></td>
+                         </form>
+
+                         <form action="formulaire_inscription.php" method="post"> 
+                         <input type="hidden" name="id" value='.$value['id_usager'].'>
+                         <td><input id="profil" type="submit" name="submit" value="Voir profil"></td>
+                         </form>
                         
-                    </tr> </table>';
+                    </tr> ';
                 }
+                echo'</table>';
                 ?>
             </div>
         </section>

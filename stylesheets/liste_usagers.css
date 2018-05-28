@@ -1,0 +1,19 @@
+table {
+	border-collapse: collapse;
+	width: 100%;
+
+}
+
+#part td {
+	border-bottom: 1px solid silver;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#part th {
+	font-weight: normal;
+	text-align: left;
+	border-bottom: 3px solid silver;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
