@@ -1,5 +1,7 @@
-body {
+
+html {
     font-family: Trebuchet MS;
+    font-size: 20px;
 }
 
 a{
@@ -8,10 +10,17 @@ a{
 }
 
 #titre  {
+    text-align : center;
+    text-height : 40px;
+    font-size: 32px;
+    color: #1638E0;
+
+}
+
+#img_titre {
+    margin : 0 auto;
     text-align: center;
-    margin: 0 auto;
-   
-}    
+}  
 
 h4{
     font-size: 1.5em;
