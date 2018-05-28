@@ -12,10 +12,8 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 		$ville = $_POST['ville'];
 
 		if (isset($_POST['submit']) && $_POST['submit'] == "Terminer") {
-
 			
-			
-				$req = $linkpdo->prepare("INSERT INTO usagers (civilite, nom, prenom, adresse, cp, ville, date_naissance, numero_ss) VALUES(:nom, :prenom  :adresse :cp :ville :date_naissance :numero_ss)"); 
+				$req = $lindpo->prepare("INSERT INTO usagers (civilite, nom, prenom, adresse, cp, ville, date_naissance, numero_ss) VALUES(:nom, :prenom  :adresse :cp :ville :date_naissance :numero_ss)"); 
 				$req->execute(array('civilite' => $civilite,
 				'nom' => $nom,
 				'prenom' => $prenom,
@@ -26,11 +24,10 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 				'numero_ss' => $numeroSS
 				)); 
 				echo "OK";
-			} else {
-				echo "Not OK";
-			}
-		} if (isset($_POST['submit']) && $_POST['submit'] == "Modifier le contact") {
-			$req = $linkpdo->prepare("UPDATE USAGERS SET :nom, :prenom  :adresse :cp :ville :date_naissance :numero_ss WHERE id_usager = :id"); 
+		} 
+
+		else if (isset($_POST['submit']) && $_POST['submit'] == "Modifier le contact") {
+			$req = $linkdpo->prepare("UPDATE USAGERS SET :civilite :nom :prenom  :adresse :cp :ville :date_naissance :numero_ss WHERE id_usager = :id"); 
 				$req->execute(array('civilite' => $civilite,
 				'nom' => $nom,
 				'prenom' => $prenom,
@@ -41,8 +38,9 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 				'numero_ss' => $numeroSS, 
 				'id' => $_POST['id']
 				)); 
-
+				echo "Modif OK";
 		}
+
 		else if(isset($_POST['submit']) &&  $_POST['submit'] == "Supprimer le contact" && isset($_POST['id'])){
 			$req = $linkpdo->prepare("DELETE FROM USAGERS WHERE id_usager = :id"); 
 				$req->execute(array('id' => $_POST['id']));
