@@ -39,7 +39,7 @@
     margin-right: auto;
 }
 
-#formulaire form input[type=submit]
+#formulaire form #terminer
 {
     text-align: center;
     background-color: #1638e0;
@@ -48,6 +48,23 @@
     margin-top: 10px;
     display: block;
     margin: 0 auto;
-    margin-top: 20px;
     color: white;
+    margin-bottom: 10px;
 }
+
+#formulaire form #modifier{
+   text-decoration: underline;
+   border: none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#formulaire form #supprimer{
+    border: none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+

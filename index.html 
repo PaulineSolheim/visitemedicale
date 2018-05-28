@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html>
 
 <head>       
 
-    <link rel="stylesheet" href="index.css"/>
+    <link rel="stylesheet" href="stylesheets/index.css"/>
     <link rel="shortcut icon" type="image/x-icon" href="doctor.png" />
 	<title> Doctor Planning </title>
 
@@ -33,9 +34,6 @@
             <!-- PUT YOUR CODE THERE -->
             <div class="section-title"> Titre </div>
             <div id="part">...</div>
-        <section>
-     
-         
         </section>
 </div>
 
@@ -45,3 +43,4 @@
 </body>
 
 </html>
+
