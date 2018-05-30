@@ -48,7 +48,7 @@
                 
                 
 
-                $reqContacts = $linkdpo->prepare('
+                $reqContacts = $linkpdo->prepare('
                         SELECT * FROM USAGERS ORDER BY nom, prenom ');
                         $reqContacts->execute();
                         $contacts = $reqContacts->fetchAll();

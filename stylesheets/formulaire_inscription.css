@@ -39,10 +39,21 @@
     margin-right: auto;
 }
 
-#formulaire form #terminer
-{
+#formulaire form #terminer {
     text-align: center;
     background-color: #1638e0;
+    border: none;
+    font-size: 0.8em;
+    margin-top: 10px;
+    display: block;
+    margin: 0 auto;
+    color: white;
+    margin-bottom: 10px;
+}
+
+#annuler{
+
+    background-color: red;
     border: none;
     font-size: 0.8em;
     margin-top: 10px;
@@ -57,7 +68,6 @@
    border: none;
     display: block;
     margin: 0 auto;
-    text-align: center;
 }
 
 #formulaire form #supprimer{
@@ -67,4 +77,8 @@
     text-align: center;
 }
 
+#dejapresent{
+    color: red;
+    font-style: italic;
+}
 
