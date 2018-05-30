@@ -2,55 +2,41 @@
 require('connect.php');
  
  //stockage des valeurs passées dans le formulaire
-if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && isset($_POST['datenaissance']) && isset($_POST['numeroSS']) && isset($_POST['adresse']) && isset($_POST['cp']) && isset($_POST['ville']) && isset($_POST['referent'])){
+if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ'])){
 		$nom = mb_strtoupper($_POST['nom']);
 		$prenom = ucwords(mb_strtolower($_POST['prenom']));
-		$datenaissance = $_POST['datenaissance'];
-		$adresse = $_POST['adresse'];
-		$cp = $_POST['cp'];
-		$numeroSS = $_POST['numeroSS'];
 		$civilite = $_POST['civ'];
-		$ville = mb_strtoupper($_POST['ville']);
-		$id_medecin = $_POST['referent'];
+
+		echo "stock OK";
 
 		//vérifier que l'usager/patient n'a pas déjà été rentré
-		$reqExist = $linkpdo->prepare("SELECT nom FROM usagers WHERE numero_ss = :numero_ss"); 
-		$reqExist->execute(array('numero_ss' => $numeroSS));
+		$reqExist = $linkpdo->prepare("SELECT nom FROM medecins WHERE nom = :nom AND prenom = :prenom"); 
+		$reqExist->execute(array('nom' => $nom,
+				'prenom' => $prenom));
 
 		$nbLignes=$reqExist->rowCount();
 		if($nbLignes != 0)
-			header('Location: formulaire_inscription2.php?usager=dejaexistant');
+			header('Location: formulaire_inscription_medecin?medecin=dejaexistant');
 
 
 		
 
 		if (isset($_POST['submit']) && $_POST['submit'] == "Terminer") {
 			
-				$req = $linkpdo->prepare("INSERT INTO usagers (civilite, nom, prenom, adresse, cp, ville, date_naissance, numero_ss, id_medecin) VALUES(:civilite, :nom, :prenom, :adresse, :cp, :ville, :date_naissance, :numero_ss, :id_medecin)"); 
+				$req = $linkpdo->prepare("INSERT INTO medecins (civilite, nom, prenom) VALUES(:civilite, :nom, :prenom)"); 
 				$req->execute(array('civilite' => $civilite,
 				'nom' => $nom,
-				'prenom' => $prenom,
-				'adresse' => $adresse,
-				'cp' => $cp,
-				'ville' => $ville,
-				'date_naissance' => $datenaissance,
-				'numero_ss' => $numeroSS,
-				'id_medecin' => $id_medecin
+				'prenom' => $prenom
 				)); 
 				echo "insertion OK";
 			} 
 
-		else if (isset($_POST['submit']) && $_POST['submit'] == "Modifier le contact") {
-			$req = $linkpdo->prepare("UPDATE USAGERS SET civilite = :civilite, nom = :nom, prenom = :prenom, adresse=  :adresse, cp= :cp, ville= :ville, date_naissance= :date_naissance, numero_ss = :numero_ss, id_medecin = :id_medecin WHERE id_usager = :id"); 
+		else if (isset($_POST['submit']) && $_POST['submit'] == "Modifier les données") {
+			$req = $linkpdo->prepare("UPDATE USAGERS SET civilite = :civilite, nom = :nom, prenom = :prenom WHERE id_medecin = :id"); 
 				$req->execute(array('civilite' => $civilite,
 				'nom' => $nom,
 				'prenom' => $prenom,
-				'adresse' => $adresse,
-				'cp' => $cp,
-				'ville' => $ville,
-				'date_naissance' => $datenaissance,
-				'numero_ss' => $numeroSS, 
-				'id' => $_POST['id'], 
+
 				'id_medecin' => $id_medecin
 				)); 
 				echo "Modif OK";

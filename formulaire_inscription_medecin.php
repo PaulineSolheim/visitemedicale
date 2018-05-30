@@ -37,18 +37,18 @@
             require("connect.php");
               if(isset($_POST['submit']) && isset($_POST['id']) ){
 
-                $req = $linkpdo->prepare("SELECT * FROM USAGERS WHERE id_usager = :id"); 
+                $req = $linkpdo->prepare("SELECT * FROM MEDECINS WHERE id_medecin = :id"); 
                 $req->execute(array("id"=> $_POST['id'])); 
                 $contact = $req->fetch();
 
               }
             ?>
-            <div class="section-title"> Ajouter/Modifier un usager </div>
+            <div class="section-title"> Ajouter/Modifier un médecin </div>
                     <div id="formulaire">
-           <form action="formulaire_inscriptionSQL.php" method="post" id="formu">
+           <form action="formulaire_inscriptionSQL_medecin" method="post" id="formu">
             <?php 
-              if(isset($_GET['usager'])){
-                echo '<span id="dejapresent"> Usager déjà présent dans la base</span>';
+              if(isset($_GET['medecin'])){
+                echo '<span id="dejapresent"> Medecin déjà présent dans la base</span>';
               }
             ?>
                <table id="table">
@@ -73,7 +73,6 @@
                     </select></td>
                    </tr>
                 
-                <tr>
                <tr>
                 <td><label for="nom">Nom</label></td>
                 <td><input type="text" name="nom" required="required" value="<?php if(isset($contact)) echo $contact['nom'] ?>"></td>
@@ -83,69 +82,14 @@
                     <td><label for="prenom">Prénom</label></td>
                     <td><input type="text" name="prenom" required="required" value ="<?php if(isset($contact)) echo $contact['prenom'] ?>"></td>
                    </tr>
-                 <tr>
-                    <td><label for="datenaissance">Date de naissance</label></td>
-                    <td><input type="date" name="datenaissance" required="required" value ="<?php if(isset($contact)) echo $contact['date_naissance'] ?>"></td>
-                </tr>
-                 <tr>
-                    <td><label for="numeroSS">N° de sécurité sociale</label></td>
-                    <td><input type="text" name="numeroSS" required="required" value ="<?php if(isset($contact)) echo $contact['numero_ss'] ?>"></td>
-                </tr>
-                
-                        
-                <tr>
-                    <td><label for="adresse">Adresse</label></td>
-                    <td><input type="text" name="adresse" required="required" value ="<?php if(isset($contact)) echo $contact['adresse'] ?>"></td>
-                   </tr>
-                
-                <tr>
-                    <td><label for="cp">Code postal</label></td>
-                    <td><input type="text" name="cp" required="required" value ="<?php if(isset($contact)) echo $contact['cp'] ?>"></td>
-                </tr>
-                <tr>
-                    <td><label for="ville">Ville</label></td>
-                    <td><input type="text" name="ville" required="required" value ="<?php if(isset($contact)) echo $contact['ville'] ?>"></td>
-                </tr>
-                <tr>
-                    <td><label for="referent">Médecin référent</label></td>
-                    <td><select type="select" name="referent" form="formu">
-                          <option>  
-                      <?php
-                        
+                </table>
 
-                            $res = $linkpdo->prepare("SELECT * FROM medecins ORDER BY nom");
-                            $res->execute();
-                            $medecins = $res->fetchAll();
-
-                            foreach($medecins as $med) { 
-                                echo '<option '; 
-                                 
-                                    if(isset($contact) && $med['id_medecin'] == $contact['id_medecin']){
-                                     echo 'selected="selected"' ;
-                                     }
-                                 
-
-
-                                 echo ' value='.$med['id_medecin'].'>'.$med['nom']. ' '.$med['prenom'];
-                            
-                          }
-                      ?>
-
-
-                    </select>
-                    </td>
-                </tr>
-
-                
-                <tr>
-               </table>
-                <input type="hidden" name="id" value="<?php if(isset($contact)) echo $contact['id_usager']; ?>">
-
-                <?php 
+                <input type="hidden" name="id" value="<?php if(isset($contact)) echo $contact['id_medecin']; ?>">
+               <?php 
                 if(!isset($contact)){
                 echo '<input id="terminer" type="submit" name="submit" value="Terminer">';
                 } else {
-                  echo '<input id="modifier" type="submit" name="submit" value="Modifier le contact"><br>
+                  echo '<input id="modifier" type="submit" name="submit" value="Modifier les données"><br>
                   <input id="supprimer" type="submit" name="submit" value="Supprimer le contact">';
                 }
                 ?>

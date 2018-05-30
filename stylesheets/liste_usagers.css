@@ -17,3 +17,14 @@ table {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
+
+#ajout{
+    background-color: #1638e0;
+    border: none;
+    color: white;
+    height: 30px;
+    box-shadow: 2px 3px 15px rgba(22, 56, 254, 0.3);
+    border-radius: 25px;
+
+}

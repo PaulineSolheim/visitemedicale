@@ -41,31 +41,29 @@
                             <tr>
                                 <th> Nom </th>
                                 <th> Prenom </th> 
-                                <th> N° de sécurité sociale </th>
                                 <th>  </th>
-                                <th> <form action="formulaire_inscription.php" method="post"> <input id="ajout" type="submit" name="submit" value="Ajouter un usager"></form> </th>
+                                <th> <form action="formulaire_inscription_medecin.php" method="post"> <input id="ajout" type="submit" name="submit" value="Ajouter un médecin"></form> </th>
                             </tr>';
 
                 $reqContacts = $linkpdo->prepare('
-                        SELECT * FROM USAGERS ORDER BY nom, prenom ');
+                        SELECT * FROM medecins ORDER BY nom, prenom ');
                         $reqContacts->execute();
                         $contacts = $reqContacts->fetchAll();
                         foreach($contacts as $value) { 
                     echo '
                     
                   
-                     <tr class = "toggle"> <form>
+                     <tr class = "toggle"> 
                         <td> '. $value['nom'] .' </td>
                         <td> '. $value['prenom'] . ' </td>
-                        <td> '.$value['numero_ss']  . ' </td>
 
                         <form action="consultations.php" method="post"> 
-                        <input type="hidden" name="id" value='.$value['id_usager'].'>
+                        <input type="hidden" name="id" value='.$value['id_medecin'].'>
                          <td><input id="profil" type="submit" name="submit" value="Voir consultations"></td>
                          </form>
 
-                         <form action="formulaire_inscription.php" method="post"> 
-                         <input type="hidden" name="id" value='.$value['id_usager'].'>
+                         <form action="formulaire_inscription_medecin.php" method="post"> 
+                         <input type="hidden" name="id" value='.$value['id_medecin'].'>
                          <td><input id="profil" type="submit" name="submit" value="Voir profil"></td>
                          </form>
                         
