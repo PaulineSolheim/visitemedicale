@@ -41,6 +41,7 @@
                 $req->execute(array("id"=> $_POST['id'])); 
                 $contact = $req->fetch();
 
+
               }
             ?>
             <div class="section-title"> Ajouter/Modifier un médecin </div>
@@ -84,13 +85,13 @@
                    </tr>
                 </table>
 
-                <input type="hidden" name="id" value="<?php if(isset($contact)) echo $contact['id_medecin']; ?>">
+                <input type="hidden" name="id_medecin" value="<?php if(isset($contact)) echo $contact['id_medecin']; ?>">
                <?php 
                 if(!isset($contact)){
                 echo '<input id="terminer" type="submit" name="submit" value="Terminer">';
                 } else {
                   echo '<input id="modifier" type="submit" name="submit" value="Modifier les données"><br>
-                  <input id="supprimer" type="submit" name="submit" value="Supprimer le contact">';
+                  <input id="supprimer" type="submit" name="submit" value="Supprimer le médecin">';
                 }
                 ?>
                 <input id="annuler" type="reset" name="annuler" value="Annuler">

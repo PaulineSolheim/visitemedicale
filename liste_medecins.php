@@ -33,7 +33,7 @@
         </aside>
         <section>
             <!-- PUT YOUR CODE THERE -->
-            <div class="section-title"> Liste des usagers </div>
+            <div class="section-title"> Liste des médecins </div>
             <div id="part">
                 <?php
                 require('connect.php');
