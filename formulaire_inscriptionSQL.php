@@ -2,7 +2,7 @@
 require('connect.php');
  
  //stockage des valeurs passées dans le formulaire
-if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && isset($_POST['datenaissance']) && isset($_POST['numeroSS']) && isset($_POST['adresse']) && isset($_POST['cp']) && isset($_POST['ville']) && isset($_POST['referent'])){
+if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && isset($_POST['datenaissance']) && isset($_POST['numeroSS']) && isset($_POST['adresse']) && isset($_POST['cp']) && isset($_POST['ville'])){
 		$nom = mb_strtoupper($_POST['nom']);
 		$prenom = ucwords(mb_strtolower($_POST['prenom']));
 		$datenaissance = $_POST['datenaissance'];
@@ -11,7 +11,12 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 		$numeroSS = $_POST['numeroSS'];
 		$civilite = $_POST['civ'];
 		$ville = mb_strtoupper($_POST['ville']);
-		$id_medecin = $_POST['referent'];
+		if($_POST['referent']!=""){
+			$id_medecin = $_POST['referent'];
+		} else{
+			$id_medecin= null;
+		}
+		
 
 		//vérifier que l'usager/patient n'a pas déjà été rentré
 		$reqExist = $linkpdo->prepare("SELECT nom FROM usagers WHERE numero_ss = :numero_ss"); 
@@ -19,13 +24,13 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 
 		$nbLignes=$reqExist->rowCount();
 		if($nbLignes != 0)
-			header('Location: formulaire_inscription2.php?usager=dejaexistant');
+			header('Location: formulaire_inscription.php?usager=dejaexistant');
 
 
 		
 
 		if (isset($_POST['submit']) && $_POST['submit'] == "Terminer") {
-			
+			//	if(isset($_POST['referent'])){
 				$req = $linkpdo->prepare("INSERT INTO usagers (civilite, nom, prenom, adresse, cp, ville, date_naissance, numero_ss, id_medecin) VALUES(:civilite, :nom, :prenom, :adresse, :cp, :ville, :date_naissance, :numero_ss, :id_medecin)"); 
 				$req->execute(array('civilite' => $civilite,
 				'nom' => $nom,
@@ -61,7 +66,8 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 				$req->execute(array('id' => $_POST['id']));
 				echo "contact supp";
 		}
-		//header('Location: liste_usagers.php');
+
+		header('Location: liste_usagers.php');
 	}
 
 ?>

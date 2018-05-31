@@ -48,7 +48,7 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 				$req->execute(array('id' => $_POST['id_medecin']));
 				echo "contact supp";
 		}
-		//header('Location: liste_usagers.php');
+		header('Location: liste_medecins.php');
 	}
 
 ?>

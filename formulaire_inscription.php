@@ -4,12 +4,11 @@
 
 <head>       
 
-    <link rel="stylesheet" href="stylesheets/formulaire_inscription.css">
-    <link rel="stylesheet" href="stylesheets/index.css">
-    <link rel="shortcut icon" type="image/x-icon" href="doctor.png" />
-  <title> Doctor Planning </title>
+    <!-- HEAD AVEC LINKS -->
+    <?php include('head.html'); ?>
 
 </head>
+
   
 <body>
   
@@ -17,20 +16,9 @@
   <div id=titre> Doctor Planning </div>
 
    <div id="wrapper">
-        <aside id="left-menu">
-            <div class="head">
-                <div class="head-title"> Bonjour, </div>
-                <div class="head-subtitle"> </div>
-            </div>
-            <div class="menu">
-                <ul>
-                    <a href=""><li>Usagers</li></a>
-                    <a href=""><li>Medecins</li></a>
-                    <a href=""><li>Consultations</li></a>
-                    <a href=""><li>Statistiques</li></a>
-                </ul>
-            </div>
-        </aside>
+                <!-- MENU DE GAUCHE -->
+        <?php include('aside.html'); ?>
+        
         <section>
             <!-- PUT YOUR CODE THERE -->
             <?php 
