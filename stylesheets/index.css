@@ -133,3 +133,8 @@ img {
     padding: 15px;
     box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.3);
 }
+
+h3{
+    text-align: center;
+    margin-bottom: 4%;
+}

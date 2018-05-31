@@ -21,16 +21,15 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 		//vérifier que l'usager/patient n'a pas déjà été rentré
 		$reqExist = $linkpdo->prepare("SELECT nom FROM usagers WHERE numero_ss = :numero_ss"); 
 		$reqExist->execute(array('numero_ss' => $numeroSS));
-
 		$nbLignes=$reqExist->rowCount();
 		if($nbLignes != 0)
 			header('Location: formulaire_inscription.php?usager=dejaexistant');
 
 
 		
-
+		//si c'est l'ajout d'un usager
 		if (isset($_POST['submit']) && $_POST['submit'] == "Terminer") {
-			//	if(isset($_POST['referent'])){
+
 				$req = $linkpdo->prepare("INSERT INTO usagers (civilite, nom, prenom, adresse, cp, ville, date_naissance, numero_ss, id_medecin) VALUES(:civilite, :nom, :prenom, :adresse, :cp, :ville, :date_naissance, :numero_ss, :id_medecin)"); 
 				$req->execute(array('civilite' => $civilite,
 				'nom' => $nom,
@@ -45,6 +44,7 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 				echo "insertion OK";
 			} 
 
+		//si c'est la modif d'un usager
 		else if (isset($_POST['submit']) && $_POST['submit'] == "Modifier le contact") {
 			$req = $linkpdo->prepare("UPDATE USAGERS SET civilite = :civilite, nom = :nom, prenom = :prenom, adresse=  :adresse, cp= :cp, ville= :ville, date_naissance= :date_naissance, numero_ss = :numero_ss, id_medecin = :id_medecin WHERE id_usager = :id"); 
 				$req->execute(array('civilite' => $civilite,
@@ -60,7 +60,8 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 				)); 
 				echo "Modif OK";
 		}
-
+		
+		//si c'est la suppression d'un usager
 		else if(isset($_POST['submit']) &&  $_POST['submit'] == "Supprimer le contact" && isset($_POST['id'])){
 			$req = $linkpdo->prepare("DELETE FROM USAGERS WHERE id_usager = :id"); 
 				$req->execute(array('id' => $_POST['id']));
