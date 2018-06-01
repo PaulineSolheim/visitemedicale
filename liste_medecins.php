@@ -44,8 +44,8 @@
                                 <td width= 25%> '. $value['nom'] .' </td>
                                 <td width= 25%> '. $value['prenom'] . ' </td>
 
-                                <form action="consultations.php" method="post"> 
-                                 <input type="hidden" name="id" value='.$value['id_medecin'].'>
+                                <form action="liste_consultations.php" method="post"> 
+                                 <input type="hidden" name="id_medecin" value='.$value['id_medecin'].'>
                                   <td width= 25%>
                                   <input id="profil" type="submit" name="submit" value="Voir consultations"></td>
                                  </form>

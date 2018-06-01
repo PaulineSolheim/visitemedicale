@@ -1,3 +1,8 @@
+#conteneur{
+    display: flex;
+    justify-content: space-between;
+}
+
 #formulaire
 {
     padding: 5%;
