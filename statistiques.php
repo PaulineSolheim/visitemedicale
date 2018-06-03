@@ -19,9 +19,13 @@
         <?php include('aside.html'); ?>
 
         <section>
+            <div class="section-title"> Statistiques </div>
+            <div id="part">
             <!-- PUT YOUR CODE THERE -->
             <?php 
             require('connect.php');
+
+
                 $nbUsagers = $linkpdo->query("SELECT COUNT(*) FROM USAGERS")->fetchColumn();
                 //hommes de moins de 25 ans
                 $reqMoinsDe25H = $linkpdo->query('SELECT COUNT(*) as TOTAL FROM usagers WHERE date_naissance > DATE_SUB(curdate(), INTERVAL 25 YEAR) AND civilite ="Mr"')->fetchColumn();
@@ -57,8 +61,7 @@
 
 
 
-            <div class="section-title"> Statistiques </div>
-            <div id="part">
+                <h4> Répartition des usagers </h4>
                 <table>
                             <tr>
                                 <th> Tranche d'âge </th>
@@ -67,30 +70,59 @@
                             </tr>
                             <tr>
                                 <td> Moins de 25 ans </td>
-                                <td> <?php echo $moinsDe25H.' %'; ?></td> 
-                                <td> <?php echo $moinsDe25F.' %'; ?></td>
+                                <td class="valeur"> <?php echo $moinsDe25H.' %'; ?></td> 
+                                <td class="valeur"> <?php echo $moinsDe25F.' %'; ?></td>
                             </tr>
                             <tr>
                                 <td> Entre 25 et 50 ans </td>
-                                <td> <?php echo $entre25Et50H.' %'; ?> </td> 
-                                <td> <?php echo $entre25Et50F.' %'; ?> </td>
+                                <td class="valeur"> <?php echo $entre25Et50H.' %'; ?> </td> 
+                                <td class="valeur"> <?php echo $entre25Et50F.' %'; ?> </td>
                             </tr>
                             <tr>
                                 <td> Plus de 50 ans </td>
-                                <td> <?php echo $plusDe50H.' %'; ?> </td> 
-                                <td>   <?php echo  $plusDe50F.' %'; ?> </td>
+                                <td class="valeur"> <?php echo $plusDe50H.' %'; ?> </td> 
+                                <td class="valeur"> <?php echo  $plusDe50F.' %'; ?> </td>
                             </tr>
-                </table>                
+                </table> <br>               
 
+                 <h4> Durée totale des consultations effectuées par chaque médecin  </h4>
+                <table>
+                    <tr>
+                        <th> Nom du médecin </th>
+                        <th> Durée de ses consultations</th>
+                    </tr>
 
+                <?php
 
+                    $reqMed = $linkpdo->prepare('SELECT DISTINCT id_medecin FROM CONSULTATIONS');
+                    $reqMed->execute();
+                    while($consultations = $reqMed->fetch()){
+                        echo '<tr>';
 
+                        $reqH = $linkpdo->prepare('SELECT * FROM CONSULTATIONS where id_medecin = :id_medecin');
+                        $reqH->execute(array('id_medecin'=>$consultations['id_medecin'] ));
+                        $nb = 0;
+                        while($heuresConsult = $reqH->fetch()){
+
+                            $heure_debut = strtotime($heuresConsult['heure_debut']) ;
+                            $heure_fin = strtotime($heuresConsult['heure_fin']);
+                            
+                            $interval = $heure_fin - $heure_debut;
+                            $nb+=$interval;
+
+                            
+                        }
+                        $reqMedNomMedecin= $linkpdo->prepare('SELECT * FROM MEDECINS WHERE id_medecin = :id_medecin');
+                        $reqMedNomMedecin->execute(array('id_medecin'=>$consultations['id_medecin'] ));
+                        $nomMedecin = $reqMedNomMedecin->fetch();
+
+                        echo '<td>'. $nomMedecin['nom'].' '.$nomMedecin['prenom'].'</td>';
+                        echo '<td> '.date('H:i:s', $nb).'</td>';
+                        echo '<tr>';
+                    }
+                 ?>
+                 </table>
             </div>
-
-
-
-
-
 
         </section>
 </div>

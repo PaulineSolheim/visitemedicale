@@ -28,7 +28,7 @@
             //Si un ID a été passé en POST c'est que c'est une modification d'un usager
             if(isset($_POST['submit']) && isset($_POST['id']) ){
 
-                $req = $linkpdo->prepare("SELECT * FROM USAGERS WHERE id_usager = :id"); 
+                $req = $linkpdo->prepare('SELECT * FROM USAGERS WHERE id_usager = :id'); 
                 $req->execute(array("id"=> $_POST['id'])); 
                 $contact = $req->fetch();
 
@@ -106,7 +106,7 @@
                           <?php
                             
                             //afficher la liste des médecins
-                            $res = $linkpdo->prepare("SELECT * FROM medecins ORDER BY nom");
+                            $res = $linkpdo->prepare('SELECT * FROM medecins ORDER BY nom');
                             $res->execute();
                             $medecins = $res->fetchAll();
 
