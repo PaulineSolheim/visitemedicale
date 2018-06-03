@@ -141,7 +141,7 @@
                   <input id="supprimer" type="submit" name="submit" value="Supprimer le contact">';
                 }
                 ?>
-                <input id="annuler" type="reset" name="annuler" value="Annuler">
+                
             </form>
           </div>
         </section>

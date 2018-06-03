@@ -39,6 +39,14 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 
 		//Si c'est la suppression d'un profil de médecin de la BDD
 		else if(isset($_POST['submit']) &&  $_POST['submit'] == "Supprimer le médecin" && isset($_POST['id_medecin'])){
+			$reqDelete = $linkpdo->prepare("DELETE FROM CONSULTATIONS WHERE id_medecin = :id"); 
+				$reqDelete->execute(array('id' => $_POST['id_medecin']));
+				echo "contact supp";
+
+			$reqDelMedRef = $linkpdo->prepare("UPDATE USAGERS SET id_medecin = null WHERE id_medecin = :id"); 
+				$reqDelMedRef->execute(array('id' => $_POST['id_medecin']));
+				echo "contact supp";
+
 			$req = $linkpdo->prepare("DELETE FROM MEDECINS WHERE id_medecin = :id"); 
 				$req->execute(array('id' => $_POST['id_medecin']));
 				echo "contact supp";

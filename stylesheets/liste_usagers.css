@@ -35,6 +35,8 @@ table {
     color: white;
     box-shadow: 2px 3px 15px rgba(22, 56, 254, 0.3);
     border-radius: 10px;
-    cursor: pointer;
+}
 
+input[type="submit"]{
+	   cursor: pointer;
 }

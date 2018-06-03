@@ -82,7 +82,6 @@
                 }
                 ?>
 
-                <input id="annuler" type="reset" name="annuler" value="Annuler">
               </form>
             </div>
         </section>
