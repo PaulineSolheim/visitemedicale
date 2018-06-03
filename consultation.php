@@ -50,10 +50,8 @@
 
 <head>       
 
-  <link rel="stylesheet" href="consultation.css"/>
-  <link rel="shortcut icon" type="image/x-icon" href="doctor.png" />
-
-	<title> Doctor Planning </title>
+   <!-- HEAD AVEC LINKS -->
+    <?php include('head.html'); ?>
 
 </head>
 	
@@ -63,20 +61,9 @@
 	<div id=titre> Doctor Planning </div>
 
    <div id="wrapper">
-        <aside id="left-menu">
-            <div class="head">
-                <div class="head-title"> </div>
-                <div class="head-subtitle"> </div>
-            </div>
-            <div class="menu">
-                <ul>
-                    <a href=""><li>Patients</li></a>
-                    <a href=""><li>Médecins</li></a>
-                    <a href=""><li>Consultations</li></a>
-                    <a href=""><li>Statistiques</li></a>
-                </ul>
-            </div>
-        </aside>
+         <!-- MENU DE GAUCHE -->
+        <?php include('aside.html'); ?>
+        
         <section>
             <div class="section-title"> Sélectionnez votre rendez-vous </div>
 

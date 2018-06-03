@@ -63,12 +63,12 @@
 
                 <tr>
                   <td><label for="nom">Nom</label></td>
-                  <td><input type="text" name="nom" required="required" value="<?php if(isset($contact)) echo $contact['nom'] ?>"></td>
+                  <td><input type="text" name="nom" required="required" value="<?php if(isset($contact)) echo $contact['nom'] ?>" pattern="[a-zA-ZàâæçéèêëîïôœùûüÿÀÂÆÇnÉÈÊËÎÏÔŒÙÛÜŸ\s-]+" title="Seuls les caractères alpha-numériques et les espaces sont acceptés"></td>
                 </tr>
 
                 <tr>
                   <td><label for="prenom">Prénom</label></td>
-                  <td><input type="text" name="prenom" required="required" value ="<?php if(isset($contact)) echo $contact['prenom'] ?>"></td>
+                  <td><input type="text" name="prenom" required="required" value ="<?php if(isset($contact)) echo $contact['prenom'] ?>" pattern="[a-zA-ZàâæçéèêëîïôœùûüÿÀÂÆÇnÉÈÊËÎÏÔŒÙÛÜŸ\s-]+" title="Seuls les caractères alpha-numériques et les espaces sont acceptés"></td>
                 </tr>
               </table>
 

@@ -23,8 +23,18 @@ table {
     background-color: #1638e0;
     border: none;
     color: white;
-    height: 30px;
     box-shadow: 2px 3px 15px rgba(22, 56, 254, 0.3);
-    border-radius: 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    min-height: 23px;
+}
+
+#voirtout{
+    background-color: #353877;
+    border: none;
+    color: white;
+    box-shadow: 2px 3px 15px rgba(22, 56, 254, 0.3);
+    border-radius: 10px;
+    cursor: pointer;
 
 }

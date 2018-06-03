@@ -68,12 +68,12 @@
 
                   <tr>
                     <td><label for="nom">Nom</label></td>
-                    <td><input type="text" name="nom" required="required" value="<?php if(isset($contact)) echo $contact['nom'] ?>"></td>
+                    <td><input type="text" name="nom" required="required" pattern="[a-zA-ZàâæçéèêëîïôœùûüÿÀÂÆÇnÉÈÊËÎÏÔŒÙÛÜŸ\s-]+" title="Seuls les caractères alpha-numériques et les espaces sont acceptés" value="<?php if(isset($contact)) echo $contact['nom'] ?>"></td>
                   </tr>
                 
                   <tr>
                     <td><label for="prenom">Prénom</label></td>
-                    <td><input type="text" name="prenom" required="required" value ="<?php if(isset($contact)) echo $contact['prenom'] ?>"></td>
+                    <td><input type="text" name="prenom" required="required" value ="<?php if(isset($contact)) echo $contact['prenom'] ?>" pattern="[a-zA-ZàâæçéèêëîïôœùûüÿÀÂÆÇnÉÈÊËÎÏÔŒÙÛÜŸ\s-]+" title="Seuls les caractères alpha-numériques et les espaces sont acceptés" ></td>
                   </tr>
                   <tr>
                     <td><label for="datenaissance">Date de naissance</label></td>
@@ -81,7 +81,7 @@
                   </tr>
                   <tr>
                     <td><label for="numeroSS">N° de sécurité sociale</label></td>
-                    <td><input type="text" name="numeroSS" required="required" value ="<?php if(isset($contact)) echo $contact['numero_ss'] ?>"></td>
+                    <td><input type="text" name="numeroSS" required="required" pattern="^[1-3][0-9]{4}(2[AB]|[0-9]{2})[0-9]{6}$" title="Numero de sécurité sociale non valide" value ="<?php if(isset($contact)) echo $contact['numero_ss'] ?>"></td>
                   </tr>
                 
                         

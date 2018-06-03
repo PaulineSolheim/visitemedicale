@@ -30,7 +30,7 @@
             <div id="conteneur">
               <div class="section-title"> Liste des consultations </div>
               <?php if(isset($_POST['id_usager']) || isset($_POST['id_medecin'])){
-              echo ' <div> <form action="liste_consultations.php" method="post"> <input id="ajout" type="submit" name="submit" value="Voir toutes les consultations"> </form></div>';
+              echo ' <div> <form action="liste_consultations.php" method="post"> <input id="voirtout" type="submit" name="submit" value="Voir toutes les consultations"> </form></div>';
             }
               ?>
             </div>
@@ -38,11 +38,11 @@
 
                   <table>
                       <tr>
-                          <th width= 25%> Nom du patient</th>
-                          <th width= 25%> Nom du médecin </th> 
-                          <th width= 25%> Date  </th>
-                          <th width= 25%> Heure </th>
-                          <th width= 10%>  </th>
+                          <th width= 20%> Patient</th>
+                          <th width= 20%> Médecin </th> 
+                          <th width= 20%> Date  </th>
+                          <th width= 20%> Heure </th>
+                          <th width=20%>  <form action="consultation.php" method="post"> <input id="ajout" type="submit" name="submit" value="Ajouter une &#13;&#10;consultation "></th>
                       </tr>
                       <?php
                       //va chercher toutes les consultations
