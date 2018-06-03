@@ -31,8 +31,32 @@
               <div class="section-title"> Liste des consultations </div>
               <?php if(isset($_POST['id_usager']) || isset($_POST['id_medecin'])){
               echo ' <div> <form action="liste_consultations.php" method="post"> <input id="voirtout" type="submit" name="submit" value="Voir toutes les consultations"> </form></div>';
-            }
+            } else {
+
               ?>
+              <form action="liste_consultations.php" method="post">
+                        <select name="id_medecin" id="choix_m">
+                                  <option value=""> Sélectionnez un médecin </option>
+                            <?php
+                                   //afficher la liste des médecins
+                            $res = $linkpdo->prepare('SELECT * FROM medecins ORDER BY nom');
+                            $res->execute();
+                            $medecins = $res->fetchAll();
+
+                            foreach($medecins as $med) { 
+                              echo '<option ';                    
+                              echo ' value='.$med['id_medecin'].'>'.$med['nom']. ' '.$med['prenom'].'</option>';
+                                
+                              }
+                             ?>
+                      </select>
+                      <input id="ajout" type="submit" name="submit" value="OK ">
+
+              </form>
+
+             <?php 
+            }
+            ?>
             </div>
               <div id="part">
 

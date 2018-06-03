@@ -24,7 +24,7 @@ table {
     border: none;
     color: white;
     box-shadow: 2px 3px 15px rgba(22, 56, 254, 0.3);
-    border-radius: 10px;
+    border-radius: 2px;
     cursor: pointer;
     min-height: 23px;
 }
@@ -34,7 +34,8 @@ table {
     border: none;
     color: white;
     box-shadow: 2px 3px 15px rgba(22, 56, 254, 0.3);
-    border-radius: 10px;
+    border-radius: 2px;
+    min-height: 23px;
 }
 
 input[type="submit"]{
