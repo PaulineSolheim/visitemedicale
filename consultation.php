@@ -4,6 +4,7 @@
 
   $rdv="";
   $lienrdv="";
+  $color="";
 
   if(isset($_POST['ok'])) {
 
@@ -17,17 +18,23 @@
 
     $date = new DateTime('0000-00-00' . $cre);
     $date->add(new DateInterval('P0Y0M0DT0H30M0S'));
-    $newdate= $date->format('H:i:s') ;        
+    $newdate= $date->format('H:i:s') ;   
 
-    $ajoutrdv = $linkpdo->prepare(" 
-        INSERT INTO CONSULTATIONS (date_consultation, id_medecin, id_usager, heure_debut, heure_fin)     
-        values (:datec, :idmed, :idusager, :heured, :heuref)");     
-    $ajoutrdv->execute(array('datec'=> $dat,'idmed'=>$med, 'idusager'=>$pat, 'heured'=>$cre, 'heuref'=>$newdate));
-    #var_dump($ajoutrdv);
-    $rdv=" Votre rendez-vous est validé "; 
-    $lienrdv= '<form name="formulaire" method="POST" action="lien_consultations.php?id_usager="'.$pat.'">  
-               <input type=submit class="boutonsvalid" value="Voir " name="voir">
-               </form>';
+      if ($dat!=null && $pat!=null && $med!=null && $cre!=null) {
+          $ajoutrdv = $linkpdo->prepare(" 
+              INSERT INTO CONSULTATIONS (date_consultation, id_medecin, id_usager, heure_debut, heure_fin)     
+              values (:datec, :idmed, :idusager, :heured, :heuref)");     
+          $ajoutrdv->execute(array('datec'=> $dat,'idmed'=>$med, 'idusager'=>$pat, 'heured'=>$cre, 'heuref'=>$newdate));
+          #var_dump($ajoutrdv);
+          $rdv="Votre rendez-vous est validé "; 
+          $color="ok";
+          $lienrdv= '<form name="formulaire" method="POST" action="lien_consultations.php?id_usager="'.$pat.'">  
+                     <input type=submit class="boutonsvalid" value="Voir " name="voir">
+                     </form>';
+      } else {
+          $rdv="Votre rendez-vous n'a pas été validé. Veuillez indiquer un creneau, un patient, un medecin et une date pour ajouter la consultation";
+          $color="ko";
+      }
   }
 
   $patient = $linkpdo->prepare('
@@ -50,8 +57,10 @@
 
 <head>       
 
-   <!-- HEAD AVEC LINKS -->
-    <?php include('head.html'); ?>
+  <link rel="stylesheet" href="consultation.css"/>
+  <link rel="shortcut icon" type="image/x-icon" href="doctor.png" />
+
+	<title> Doctor Planning </title>
 
 </head>
 	
@@ -61,16 +70,27 @@
 	<div id=titre> Doctor Planning </div>
 
    <div id="wrapper">
-         <!-- MENU DE GAUCHE -->
-        <?php include('aside.html'); ?>
-        
+        <aside id="left-menu">
+            <div class="head">
+                <div class="head-title"> </div>
+                <div class="head-subtitle"> </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <a href=""><li>Patients</li></a>
+                    <a href=""><li>Médecins</li></a>
+                    <a href=""><li>Consultations</li></a>
+                    <a href=""><li>Statistiques</li></a>
+                </ul>
+            </div>
+        </aside>
         <section>
             <div class="section-title"> Sélectionnez votre rendez-vous </div>
 
             <div id="part">
                 <form method="post" action="consultation.php">
                     <div id="confirmation">
-                      <div id="msgconfirmation"> <?php  echo " $rdv "; ?> </div>
+                      <div id="msgconfirmation" class= <?php echo $color; ?> > <?php  echo " $rdv "; ?> </div>
                       <div id="lienconsultation"> <?php echo "$lienrdv"; ?> </div>
                     </div>
                     <div id="patient">  
@@ -178,7 +198,8 @@
   var radioconsult=$("input[name='creneau']"); 
   var selectdate=$("#cal");
   console.log(radioconsult.val()); 
-  console.log(selectdate.val());   
+  console.log(selectdate.val());  
+   
   selectpatient.change(function(){ 
         $.ajax({
           url:"medecin.php?id=" + selectpatient.val(), 
