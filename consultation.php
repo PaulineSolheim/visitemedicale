@@ -6,15 +6,14 @@
   $lienrdv="";
   $color="";
 
+  $dat= isset($_POST['calendrier']) ? $_POST['calendrier'] : null;
+  $pat= isset($_POST['choix_patient']) ? $_POST['choix_patient'] : null;
+  $med= isset ($_POST['choix_medecin']) ? $_POST['choix_medecin'] : null;
+  $cre= isset ($_POST['creneau']) ? $_POST['creneau'] : null;  
+
   if(isset($_POST['ok'])) {
 
-    $dat=$_POST['calendrier'];
-    $pat=$_POST['choix_patient'];
-    $med=$_POST['choix_medecin'];
-    $cre=$_POST['creneau'];           //!! gerer quand la requete n'est  pas complete id=0
-
-    var_dump($pat);
-    var_dump($med);
+             
 
     $date = new DateTime('0000-00-00' . $cre);
     $date->add(new DateInterval('P0Y0M0DT0H30M0S'));
@@ -76,7 +75,7 @@
             <div id="part">
                 <form method="post" action="consultation.php">
                     <div id="confirmation">
-                      <div id="msgconfirmation" class= <?php echo $color; ?> > <?php  echo " $rdv "; ?> </div>
+                      <div id="msgconfirmation" class="<?php echo $color; ?>"> <?php  echo " $rdv "; ?> </div>
                       <div id="lienconsultation"> <?php echo "$lienrdv"; ?> </div>
                     </div>
                     <div id="patient">  
@@ -85,7 +84,10 @@
                                 <?php 
                                 echo '<option> Sélectionnez le patient';      
                                   foreach ($liste_pat as $ligne) {   
-                                     echo '<option value="' . $ligne['id_usager'] .'" ';     
+                                     echo '<option value="' . $ligne['id_usager'] .'" ';  
+                                     if ($pat && $pat === $ligne['id_usager']) {
+                                       echo "selected"; 
+                                     }
                                      echo '>'.$ligne['nom']." ".$ligne['prenom']; 
                                   }
                                 ?>      
@@ -99,13 +101,17 @@
                               <select name="choix_medecin" id="choix_m">
                                   <option value=""> Sélectionnez le médecin </option>
                                 <?php  foreach ($liste_med as $ligne) { 
-                                    echo '<option value="' . $ligne['id_medecin'] . '">' . $ligne['nom']." ". $ligne['prenom']; 
+                                    echo '<option value="' . $ligne['id_medecin'] . '" '; 
+                                    if ($med && $med === $ligne['id_medecin']) {
+                                      echo "selected"; 
+                                    }
+                                    echo '>' . $ligne['nom']." ". $ligne['prenom']; 
                                   }  
                                 ?>
                               </select>
 
                         <div id="nom_calendrier"> Date  </div>
-                        <input type="date" name="calendrier" id="cal">   
+                        <input type="date" name="calendrier" id="cal" value= "<?php if($dat) echo $dat; ?>">   
                    </div>
 
                    <div id="creneaux">
