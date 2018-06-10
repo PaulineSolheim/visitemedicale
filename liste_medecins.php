@@ -1,6 +1,12 @@
-<?php
-  require('connect.php');
- ?>
+ <?php 
+      require('connect.php');
+        if(!isset($_SESSION['id'])){
+
+          header('Location: index.php?connect=non');
+        }
+
+        include('head.html'); 
+?>
 
 <!DOCTYPE html>
 <html>

@@ -1,5 +1,9 @@
 <?php
+
 require('connect.php');
+
+if(!isset($_SESSION['id']))header('Location: index.php?connect=non');
+
  
  //stockage des valeurs passées dans le formulaire
 if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && isset($_POST['datenaissance']) && isset($_POST['numeroSS']) && isset($_POST['adresse']) && isset($_POST['cp']) && isset($_POST['ville'])){

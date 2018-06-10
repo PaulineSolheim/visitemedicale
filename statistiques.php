@@ -1,3 +1,8 @@
+ <?php 
+      require('connect.php');
+      
+      if(!isset($_SESSION['id']))header('Location: index.php?connect=non');
+?>
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +28,6 @@
             <div id="part">
             <!-- PUT YOUR CODE THERE -->
             <?php 
-            require('connect.php');
 
 
                 $nbUsagers = $linkpdo->query("SELECT COUNT(*) FROM USAGERS")->fetchColumn();

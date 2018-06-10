@@ -1,6 +1,13 @@
  
 <?php
-require('connect.php');
+
+
+  require('connect.php');
+  
+  if(!isset($_SESSION['id']))header('Location: index.php?connect=non');
+
+
+
  //stockage des valeurs passées dans le formulaire
 if (isset($_POST['id_medecin']) && isset($_POST['id_usager'])  && isset($_POST['date_consultation']) && isset($_POST['heure_debut']) ){
 		

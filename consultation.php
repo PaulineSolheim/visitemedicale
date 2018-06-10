@@ -1,6 +1,9 @@
 <?php 
 
   require "connect.php";
+  if(!isset($_SESSION['id'])){
+    header('Location: index.php?connect=non');   
+  }
 
   $rdv="";
   $lienrdv="";
@@ -27,7 +30,8 @@
           #var_dump($ajoutrdv);
           $rdv="Votre rendez-vous est validé "; 
           $color="ok";
-          $lienrdv= '<form name="formulaire" method="POST" action="lien_consultations.php?id_usager="'.$pat.'">  
+          $lienrdv= '<form name="formulaire" method="POST" action="liste_consultations.php">  
+                    <input type=hidden value='.$pat.' name="id_usager">
                      <input type=submit class="boutonsvalid" value="Voir " name="voir">
                      </form>';
       } else {
@@ -73,11 +77,12 @@
             <div class="section-title"> Sélectionnez votre rendez-vous </div>
 
             <div id="part">
-                <form method="post" action="consultation.php">
-                    <div id="confirmation">
+              <div id="confirmation">
                       <div id="msgconfirmation" class="<?php echo $color; ?>"> <?php  echo " $rdv "; ?> </div>
                       <div id="lienconsultation"> <?php echo "$lienrdv"; ?> </div>
                     </div>
+                <form method="post" action="consultation.php">
+                    
                     <div id="patient">  
                           <label for="choix_p" id="nom_patient"> Patient </label>
                             <select name="choix_patient" id="choix_p">

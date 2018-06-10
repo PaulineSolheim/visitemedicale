@@ -1,3 +1,8 @@
+ <?php 
+      require('connect.php');
+      
+      if(!isset($_SESSION['id']))header('Location: index.php?connect=non');
+?>
 
 <!DOCTYPE html>
 <html>
@@ -22,8 +27,6 @@
         <section>
             <!-- PUT YOUR CODE THERE -->
             <?php 
-
-            require("connect.php");
 
             //Si un ID a été passé en POST c'est que c'est une modification d'un usager
             if(isset($_POST['submit']) && isset($_POST['id']) ){

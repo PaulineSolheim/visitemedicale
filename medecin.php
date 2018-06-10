@@ -1,6 +1,10 @@
 <?php
 
-require "connect.php";
+
+require('connect.php');
+
+if(!isset($_SESSION['id']))header('Location: index.php?connect=non');
+
 
 $id = (int)$_GET["id"];
 

@@ -1,3 +1,9 @@
+ <?php 
+      require('connect.php');
+      
+      if(!isset($_SESSION['id']))header('Location: index.php?connect=non');
+?>
+
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +26,6 @@
         <section>
             <!-- PUT YOUR CODE THERE -->
             <?php 
-              require("connect.php");
 
               //si l'id du médecin a été passée en POST c'est que c'est une modification du profil du médecin
               if(isset($_POST['submit']) && isset($_POST['id']) ){

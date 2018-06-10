@@ -5,7 +5,16 @@
 <head>       
 
     <!-- HEAD AVEC LINKS -->
-    <?php include('head.html'); ?>
+    <?php 
+      require('connect.php');
+        if(!isset($_SESSION['id'])){
+
+          header('Location: index.php?connect=non');
+        }
+
+        include('head.html'); 
+
+    ?>
 
 </head>
 	
@@ -66,7 +75,7 @@
                           <th width= 20%> Médecin </th> 
                           <th width= 20%> Date  </th>
                           <th width= 20%> Heure </th>
-                          <th width=20%>  <form action="consultation.php" method="post"> <input id="ajout" type="submit" name="submit" value="Ajouter une &#13;&#10;consultation "></th>
+                          <th width=20%>  <form action="consultation.php" method="post"> <input id="ajout" type="submit" name="submit" value="Ajouter une &#13;&#10;consultation "> </form></th>
                       </tr>
                       <?php
                       //va chercher toutes les consultations
@@ -83,41 +92,41 @@
                           $reqConsult->execute();
                           $consult = $reqConsult->fetchAll();
                           foreach($consult as $value) { 
-                          $date_consultation =date("d/m/Y", strtotime($value['date_consultation']));
-                         
-                       //va chercher le nom de l'usager liée à l'id_usager de la consultation 
-                       $reqPatient = $linkpdo->prepare('
-                          SELECT * FROM USAGERS WHERE id_usager = :id_usager');
-                          $reqPatient->execute(array('id_usager' => $value['id_usager']));
-                          $patient = $reqPatient->fetch();
+                            $date_consultation =date("d/m/Y", strtotime($value['date_consultation']));
+                           
+                           //va chercher le nom de l'usager liée à l'id_usager de la consultation 
+                           $reqPatient = $linkpdo->prepare('
+                            SELECT * FROM USAGERS WHERE id_usager = :id_usager');
+                            $reqPatient->execute(array('id_usager' => $value['id_usager']));
+                            $patient = $reqPatient->fetch();
 
-                        //va cherche le nom du médecin liée à l'id_médecin de la consultation 
-                        $reqMedecin = $linkpdo->prepare('
-                          SELECT * FROM MEDECINS WHERE id_medecin = :id_medecin');
-                          $reqMedecin->execute(array('id_medecin' => $value['id_medecin']));
-                          $medecin = $reqMedecin->fetch();
-                          ?>
-                        <tr>
+                          //va cherche le nom du médecin liée à l'id_médecin de la consultation 
+                          $reqMedecin = $linkpdo->prepare('
+                            SELECT * FROM MEDECINS WHERE id_medecin = :id_medecin');
+                            $reqMedecin->execute(array('id_medecin' => $value['id_medecin']));
+                            $medecin = $reqMedecin->fetch();
+                            ?>
+                          <tr>
                             <td width= 30%> <?php echo $patient['nom'] ?> </td>
-                          <td width= 30%> <?php echo $medecin['nom']  ?> </td>
-                          <td width= 15%> 
-                            <?php echo $date_consultation;   ?> </td>
-                          <td width= 15%> <?php echo $value['heure_debut'];  ?> </td>
-                          <form action="supprimer_consultation.php" method="post"> 
+                            <td width= 30%> <?php echo $medecin['nom']  ?> </td>
+                            <td width= 15%> <?php echo $date_consultation;   ?> </td>
+                            <td width= 15%> <?php echo $value['heure_debut'];  ?> </td>
+                            <form action="supprimer_consultation.php" method="post"> 
 
-                            <?php echo '<input type="hidden" name="id_usager" value='.$value['id_usager'].'>
-                                        <input type="hidden" name="id_medecin" value='.$value['id_medecin'].'> 
-                                        <input type="hidden" name="date_consultation" value='.$value['date_consultation'].'>
-                                        <input type="hidden" name="heure_debut" value='.$value['heure_debut'].'>' ?>
+                              <?php echo '<input type="hidden" name="id_usager" value='.$value['id_usager'].'>
+                                          <input type="hidden" name="id_medecin" value='.$value['id_medecin'].'> 
+                                          <input type="hidden" name="date_consultation" value='.$value['date_consultation'].'>
+                                          <input type="hidden" name="heure_debut" value='.$value['heure_debut'].'>';?>
 
-                            <td width= 15%><input type="submit" name="supprimer" value="Supprimer"></td>
-                         </form>
-                      </tr> 
-                  
-                  <?php
-                    }
-                  echo'</table>';
-                  ?>
+                              <td width= 15%><input type="submit" name="supprimer" value="Supprimer"></td>
+                           </form>
+                        </tr> 
+                    
+                      <?php
+                        }
+                        
+                      ?>
+                </table>
               </div>
         </section>
 </div>

@@ -1,3 +1,8 @@
+ <?php 
+      require('connect.php');
+      
+      if(!isset($_SESSION['id']))header('Location: index.php?connect=non');
+?>
 
 <!DOCTYPE html>
 <html>
@@ -22,9 +27,7 @@
             <!-- PUT YOUR CODE THERE -->
             <div class="section-title"> Liste des usagers </div>
             <div id="part">
-                <?php
-                require('connect.php');
-                ?>
+             
                <table>
                     <tr>
                         <th width= 20%> Nom </th>

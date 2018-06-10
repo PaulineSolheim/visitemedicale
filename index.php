@@ -20,14 +20,22 @@
         <div id="inscription">
 	    <h4>Connexion à votre compte</h4>
 
-		     <form action="formulaire.php" method="post">
-                <label for="adressemail">Adresse e-mail</label>
-                <input type="email" name="adressemail"><br>
-                <label for="motdepasse">Mot de passe</label>
-                <input type="password" name="motdepasse" minlength="6" required><br>
+		     <form action="formulaire_connexion.php" method="post">
+                <label for="identifiant">Identifiant</label>
+                <input type="text" name="identifiant" required="required"><br>
+                <label for="mdp">Mot de passe</label>
+                <input type="password" name="mdp" required><br>
                 <input type="submit" name="submit" value="Se connecter"><br>
-        	    <a href="??"> S'inscrire</a><br>
-               	
+
+                <?php
+                    if(isset($_GET['motdepasse'])){
+                        echo "Mot de passe invalide";
+                    } 
+                    if(isset($_GET['connect'])){
+                        echo "Veuillez vous connecter";
+                    }
+                ?>
+   
               
             </form>
         </div>
