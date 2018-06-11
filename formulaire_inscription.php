@@ -90,12 +90,12 @@
                         
                   <tr>
                     <td><label for="adresse">Adresse</label></td>
-                    <td><input type="text" name="adresse" required="required" value ="<?php if(isset($contact)) echo $contact['adresse'] ?>"></td>
+                    <td><input type="text" name="adresse" required="required"  value ="<?php if(isset($contact)) echo $contact['adresse'] ?>"></td>
                   </tr>
                 
                   <tr>
                     <td><label for="cp">Code postal</label></td>
-                    <td><input type="text" name="cp" required="required" value ="<?php if(isset($contact)) echo $contact['cp'] ?>"></td>
+                    <td><input type="text" name="cp" required="required" pattern="[0-9]{5}" value ="<?php if(isset($contact)) echo $contact['cp'] ?>"></td>
                   </tr>
                   <tr>
                     <td><label for="ville">Ville</label></td>

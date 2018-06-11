@@ -9,7 +9,14 @@
   $lienrdv="";
   $color="";
 
-  $dat= isset($_POST['calendrier']) ? $_POST['calendrier'] : null;
+  if(isset($_POST['calendrier'])){
+    if(date("Y", strtotime($_POST['calendrier'])) > 1900 && checkdate(date("m", strtotime($_POST['calendrier'])) , date("m", strtotime($_POST['calendrier'])) ,  date("Y", strtotime($_POST['calendrier']))) ){
+      $dat= $_POST['calendrier'] ;
+    }else{  
+      $dat=null;
+      echo "date invalide";
+  }
+  }
   $pat= isset($_POST['choix_patient']) ? $_POST['choix_patient'] : null;
   $med= isset ($_POST['choix_medecin']) ? $_POST['choix_medecin'] : null;
   $cre= isset ($_POST['creneau']) ? $_POST['creneau'] : null;  
@@ -116,7 +123,7 @@
                               </select>
 
                         <div id="nom_calendrier"> Date  </div>
-                        <input type="date" name="calendrier" id="cal" value= "<?php if($dat) echo $dat; ?>">   
+                        <input type="date" name="calendrier" id="cal" value= "<?php if(isset($dat)) echo $dat; ?>">   
                    </div>
 
                    <div id="creneaux">

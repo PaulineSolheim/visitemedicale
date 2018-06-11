@@ -107,10 +107,10 @@
                             $medecin = $reqMedecin->fetch();
                             ?>
                           <tr>
-                            <td width= 30%> <?php echo $patient['nom'] ?> </td>
+                            <td width= 30%> <?php echo $patient['nom']." ".$patient['prenom'] ?> </td>
                             <td width= 30%> <?php echo $medecin['nom']  ?> </td>
                             <td width= 15%> <?php echo $date_consultation;   ?> </td>
-                            <td width= 15%> <?php echo $value['heure_debut'];  ?> </td>
+                            <td width= 15%> <?php echo date("H:i", strtotime($value['heure_debut']));  ?> </td>
                             <form action="supprimer_consultation.php" method="post"> 
 
                               <?php echo '<input type="hidden" name="id_usager" value='.$value['id_usager'].'>

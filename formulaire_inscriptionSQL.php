@@ -9,7 +9,16 @@ if(!isset($_SESSION['id']))header('Location: index.php?connect=non');
 if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && isset($_POST['datenaissance']) && isset($_POST['numeroSS']) && isset($_POST['adresse']) && isset($_POST['cp']) && isset($_POST['ville'])){
 		$nom = mb_strtoupper($_POST['nom']);
 		$prenom = ucwords(mb_strtolower($_POST['prenom']));
-		$datenaissance = $_POST['datenaissance'];
+		$current_date=date("Y-m-d");
+		if( date("Y", strtotime($_POST['datenaissance'])) > 1900 && checkdate(date("m", strtotime($_POST['datenaissance'])) , date("m", strtotime($_POST['datenaissance'])) ,  date("Y", strtotime($_POST['datenaissance']))) && new DateTime() > new DateTime($_POST['datenaissance'])){
+			$datenaissance = $_POST['datenaissance'];
+			echo "OK";}
+		else
+			header('Location:formulaire_inscription.php?date=invalide');
+
+
+
+
 		$adresse = $_POST['adresse'];
 		$cp = $_POST['cp'];
 		$numeroSS = $_POST['numeroSS'];
@@ -29,7 +38,7 @@ if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['civ']) && 
 			$reqExist = $linkpdo->prepare("SELECT nom FROM usagers WHERE numero_ss = :numero_ss"); 
 			$reqExist->execute(array('numero_ss' => $numeroSS));
 			$nbLignes=$reqExist->rowCount();
-			if($nbLignes != 0)
+			if($nbLignes != 0){}
 				header('Location: formulaire_inscription.php?usager=dejaexistant');
 
 				$req = $linkpdo->prepare("INSERT INTO usagers (civilite, nom, prenom, adresse, cp, ville, date_naissance, numero_ss, id_medecin) VALUES(:civilite, :nom, :prenom, :adresse, :cp, :ville, :date_naissance, :numero_ss, :id_medecin)"); 
